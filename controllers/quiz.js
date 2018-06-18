@@ -162,11 +162,8 @@ exports.randomPlay = (req,res,next) => {
                 score,
                 quiz
             });
-        })
-        .catch(error => {
-            req.flash('error', 'Error deleting the Quiz: ' + error.message);
-            next(error);
         });
+        
     };
 
 // GET /quizzes/:quizId/check
@@ -191,7 +188,7 @@ exports.randomCheck = (req,res,next) => {
     const result = answer.toLowerCase().trim() === quiz.answer.toLowerCase().trim();
     let score=0;
     if(!result){
-        let score=req.session.randomPlay.length-1;
+        let score=req.session.randomPlay.length;
         req.session.randomPlay=[];
         res.render('random_result',{
             score,
