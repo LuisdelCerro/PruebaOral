@@ -154,7 +154,8 @@ exports.randomPlay = (req,res,next) => {
                  score
              });
          }
-    
+         else{
+
          let id_azar = Math.floor(Math.random()*quizzes.length);
          let quiz=quizzes[id_azar];
          let score=req.session.randomPlay.length;
@@ -162,8 +163,8 @@ exports.randomPlay = (req,res,next) => {
                 score,
                 quiz
             });
+        }
         });
-        
     };
 
 // GET /quizzes/:quizId/check
