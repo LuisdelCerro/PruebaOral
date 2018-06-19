@@ -218,7 +218,12 @@ exports.randomPlay = (req,res,next) => {
         req.session.randomPlay=[];
     }
     const whereOpt={"id":{[Sequelize.Op.notIn]:req.session.randomPlay}};
-    return models.quiz.findAll({where:whereOpt})
+    return models.quiz.findAll({where:whereOpt,include: [
+                {model:models.tip,
+                    include:[
+                    {model:models.user, as:'author'}]},
+                {model: models.user, as: 'author'}
+            ]})
         .then(quizzes=>{
 
             if(quizzes.length===0){
